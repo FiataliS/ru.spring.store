@@ -18,8 +18,12 @@ public class ProductService {
         return productInMemoryRepository.findById(id);
     }
 
-    public List<Product> getAllProduct (){
+    public List<Product> getAllProduct() {
         return productInMemoryRepository.getProductList();
+    }
+
+    public void addProduct(Long id, String name, int cost) {
+        productInMemoryRepository.addProductList(new Product(id, name, cost));
     }
 
 }

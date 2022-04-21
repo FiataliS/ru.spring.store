@@ -22,13 +22,7 @@ public class CardService {
     private ProductService productService;
 
     public List<Product> getCardList() {
-        List<Product> showcCardList = new ArrayList<>(cardList);
-        if (showcCardList.size() == 0) {
-            showcCardList.add(new Product(0, "Корзина пуста", 0));
-        } else {
-            showcCardList.add(new Product(0, "Итого:", sumCardList()));
-        }
-        return showcCardList;
+        return cardList;
     }
 
     public void addProductCard(Long id) {
@@ -36,9 +30,7 @@ public class CardService {
     }
 
     public void delProductCard(Long id) {
-        if (id != 0) {
             this.cardList.remove(productService.getProduct(id));
-        }
     }
 
     public int sumCardList() {
@@ -53,5 +45,9 @@ public class CardService {
         if (cardList.size() != 0) {
             cardList.clear();
         }
+    }
+
+    public int sizeList(){
+        return getCardList().size();
     }
 }

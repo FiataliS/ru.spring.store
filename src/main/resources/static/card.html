@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="index.js"></script>
+    <title>Apple Store</title>
+</head>
+
+<body class="body">
+<table class="sheetsTable">
+    <tr>
+        <td colspan="2">Добпро пожаловать в магазин Яблок</td>
+    </tr>
+    <tr class="c1" align="center">
+        <td></td>
+        <td>Яблоки</td>
+    </tr>
+    <tr class="l1" valign="top">
+        <td valign="top">
+            <pre>
+            </pre>
+            <a href="index.html" class="btn">Продукты</a>
+        </td>
+        <td>
+            <div class="container" ng-controller="indexController">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Наименование</th>
+                        <th>Цена</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="s in cardList">
+                        <td>{{s.name}}</td>
+                        <td>{{s.cost}}</td>
+                        <td>
+                            <button class="btn" ng-click="clearId(s.id)">удалить</button>
+                    </tr>
+                    </tbody>
+                    <tr>
+                        <td align="right">Итого:</td>
+                        <td> {{countCost}}</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
