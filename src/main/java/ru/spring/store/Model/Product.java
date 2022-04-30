@@ -1,33 +1,67 @@
 package ru.spring.store.Model;
 
 
+import javax.persistence.*;
+
+@Entity
+@Table (name = "product")
 public class Product {
-    Long id;
-    String name;
-    int cost;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-    public Product(long id, String name, int cost) {
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "price")
+    private int price;
+
+    public Product(){}
+
+    public Product(String title, int price) {
+        this.title = title;
+        this.price = price;
+    }
+
+    public Product(Long id, String title, int price) {
         this.id = id;
-        this.name = name;
-        this.cost = cost;
+        this.title = title;
+        this.price = price;
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
 
     @Override
     public String toString() {
-        return name + ", цена: " + cost +'$'+ '\n';
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getCost() {
-        return cost;
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

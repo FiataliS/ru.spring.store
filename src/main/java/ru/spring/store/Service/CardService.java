@@ -36,7 +36,7 @@ public class CardService {
     public int sumCardList() {
         int i = 0;
         for (Product c : cardList) {
-            i += c.getCost();
+            i += c.getPrice();
         }
         return i;
     }

@@ -4,6 +4,7 @@ package ru.spring.store.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.spring.store.Dao.ProductDao;
 import ru.spring.store.Model.Product;
 import ru.spring.store.Service.CardService;
 import ru.spring.store.Service.ProductService;
@@ -43,8 +44,5 @@ public class MainController {
     public int countCost(){
         return card.sumCardList();
     }
-
-
-
 
 }

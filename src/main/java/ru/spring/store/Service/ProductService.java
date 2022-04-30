@@ -1,10 +1,9 @@
 package ru.spring.store.Service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.spring.store.Dao.ProductDao;
 import ru.spring.store.Model.Product;
-import ru.spring.store.Repository.ProductInMemoryRepository;
 
 import java.util.List;
 
@@ -12,18 +11,19 @@ import java.util.List;
 public class ProductService {
 
     @Autowired
-    private ProductInMemoryRepository productInMemoryRepository;
+    ProductDao productDao;
+
 
     public Product getProduct(Long id) {
-        return productInMemoryRepository.findById(id);
+        return productDao.findById(id);
     }
 
     public List<Product> getAllProduct() {
-        return productInMemoryRepository.getProductList();
+        return productDao.findAll();
     }
 
-    public void addProduct(Long id, String name, int cost) {
-        productInMemoryRepository.addProductList(new Product(id, name, cost));
+    public void addProduct(Long id, String name, int price) {
+        productDao.saveOrUpdate(new Product(id, name, price));
     }
 
 }
