@@ -49,7 +49,22 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
                });
     };
 
+    $scope.addProduct = function (name, price){
+                $http({
+                    url: contextPath + '/product/add',
+                    method: 'GET',
+                    params: {
+                        name: name,
+                        price: price,
+                    }
+                }).then(function (response){
+                    $scope.loadProduct();
+                });
+            };
+
     $scope.countCost();
     $scope.loadCard();
+
+
 
 });

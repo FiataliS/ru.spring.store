@@ -39,7 +39,7 @@
                     <tbody>
                     <tr ng-repeat="s in cardList">
                         <td>{{s.name}}</td>
-                        <td>{{s.cost}}</td>
+                        <td>{{s.price}}</td>
                         <td>
                             <button class="btn" ng-click="clearId(s.id)">удалить</button>
                     </tr>
@@ -49,6 +49,7 @@
                         <td> {{countCost}}</td>
                         <td></td>
                     </tr>
+                    <a href="add.html" class="btn">Купить</a>
                 </table>
             </div>
         </td>

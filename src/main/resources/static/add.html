@@ -24,29 +24,18 @@
             <pre>
             </pre>
             <a href="card.html" class="btn">Корзина</a>
-            <a href="add.html" class="btn">Добавить продукт</a>
+            <a href="index.html" class="btn">Продукты</a>
         </td>
         <td>
             <div class="container" ng-controller="indexController">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Наименование</th>
-                        <th>Цена</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr ng-repeat="s in productList">
-                        <td>{{s.name}}</td>
-                        <td>{{s.price}}</td>
-                        <td>
-                            <button class="btn" ng-click="cardAdd(s.id)">в корзину</button>
-                    </tr>
-                    </tbody>
-
-                </table>
+                <h1> Добавить клиент </h1>
+                <form method="get" action="addProduct(name, price)">
+                    <span>Название</span>
+                    <input id="name" name="name" type="text">
+                    <span>Цена</span>
+                    <input id="price" name="price" type="number">
+                    <button class="btn" ng-click="addProduct(name, price)" >Добавить</button>
+                </form>
             </div>
         </td>
     </tr>

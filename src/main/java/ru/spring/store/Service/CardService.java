@@ -3,7 +3,10 @@ package ru.spring.store.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import ru.spring.store.Dao.ProductDao;
 import ru.spring.store.Model.Product;
+import ru.spring.store.SessionFactoryUtils;
 
 import java.security.PublicKey;
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@Component
+@Service
 @Scope("prototype")
 public class CardService {
 
@@ -20,6 +23,7 @@ public class CardService {
 
     @Autowired
     private ProductService productService;
+
 
     public List<Product> getCardList() {
         return cardList;

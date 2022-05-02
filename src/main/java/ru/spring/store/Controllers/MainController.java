@@ -21,28 +21,35 @@ public class MainController {
     CardService card;
 
     @GetMapping("/product/all")
-    public List<Product> allProduct(){
+    public List<Product> allProduct() {
         return productService.getAllProduct();
     }
 
     @GetMapping("/card/add")
-    public void addProductCard(@RequestParam Long productId){
+    public void addProductCard(@RequestParam Long productId) {
         card.addProductCard(productId);
     }
 
     @GetMapping("/card/del")
-    public void cardDel(@RequestParam Long productId){
+    public void cardDel(@RequestParam Long productId) {
         card.delProductCard(productId);
     }
 
     @GetMapping("/card/all")
-    public List<Product> allCard(){
+    public List<Product> allCard() {
         return card.getCardList();
     }
 
     @GetMapping("/card/countCost")
-    public int countCost(){
+    public int countCost() {
         return card.sumCardList();
+    }
+
+    @GetMapping("/product/add")
+    public void addProduct(@RequestParam String name, @RequestParam int price) {
+        System.out.println(name + " " + price);
+        productService.addProduct(name, price);
+
     }
 
 }

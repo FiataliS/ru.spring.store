@@ -2,16 +2,24 @@ package ru.spring.store.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.spring.store.Dao.ProductDao;
 import ru.spring.store.Model.Product;
+import ru.spring.store.Model.Users;
+import ru.spring.store.SessionFactoryUtils;
 
 import java.util.List;
 
-@Component
+@Service
 public class ProductService {
 
     @Autowired
     ProductDao productDao;
+
+    @Autowired
+    public ProductService(SessionFactoryUtils sessionFactoryUtils) {
+        productDao = new ProductDao(sessionFactoryUtils);
+    }
 
 
     public Product getProduct(Long id) {
@@ -22,8 +30,12 @@ public class ProductService {
         return productDao.findAll();
     }
 
-    public void addProduct(Long id, String name, int price) {
-        productDao.saveOrUpdate(new Product(id, name, price));
+    public void addProduct(String name, int price) {
+        productDao.saveOrUpdate(new Product(name, price));
+    }
+
+    public List<Users> getAllUsersToProduct(Long productId) {
+        return productDao.getAllUsersToProduct(productId);
     }
 
 }

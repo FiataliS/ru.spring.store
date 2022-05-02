@@ -7,62 +7,63 @@ import ru.spring.store.Model.Product;
 import ru.spring.store.Model.Users;
 import ru.spring.store.SessionFactoryUtils;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component
-public class ProductDao {
+public class UsersDao {
 
     @Autowired
     SessionFactoryUtils sessionFactoryUtils;
 
-    public ProductDao(SessionFactoryUtils sessionFactoryUtils) {
+    public UsersDao(SessionFactoryUtils sessionFactoryUtils) {
         this.sessionFactoryUtils = sessionFactoryUtils;
     }
 
-    public Product findById(Long id) {
+    public Users findById(Long id) {
         try (Session session = sessionFactoryUtils.getSession()) {
             session.beginTransaction();
-            Product product = session.get(Product.class, id);
+            Users users = session.get(Users.class, id);
             session.getTransaction().commit();
-            return product;
+            return users;
         }
     }
 
-    public List<Product> findAll() {
+    public List<Users> findAll() {
         try (Session session = sessionFactoryUtils.getSession()) {
             session.beginTransaction();
-            List<Product> products = session.createQuery("select u from Product u").getResultList();
+            List<Users> users = session.createQuery("select u from Users u").getResultList();
             session.getTransaction().commit();
-            return products;
+            return users;
         }
     }
 
     public void deleteById(Long id) {
         try (Session session = sessionFactoryUtils.getSession()) {
             session.beginTransaction();
-            session.createQuery("DELETE Product u WHERE u.id = :id")
-                                .setParameter("id", id)
-                                .executeUpdate();
+            session.createQuery("DELETE Users u WHERE u.id = :id")
+                    .setParameter("id", id)
+                    .executeUpdate();
             session.getTransaction().commit();
         }
     }
 
-    public void saveOrUpdate(Product product) {
+    public Users saveOrUpdate(Users users) {
         try (Session session = sessionFactoryUtils.getSession()) {
             session.beginTransaction();
-            session.saveOrUpdate(product);
+            session.saveOrUpdate(users);
             session.getTransaction().commit();
+            return users;
         }
     }
 
-    public List<Users> getAllUsersToProduct (Long productId){
+    public List<Product> getAllProductToUsers (Long userId){
         try (Session session = sessionFactoryUtils.getSession()){
             session.beginTransaction();
-            Product product = session.get(Product.class, productId);
-            List<Users> usersList = product.getUsersList();
+            Users users = session.get(Users.class, userId);
+            List<Product> productList = users.getProductList();
             session.getTransaction().commit();
-            return usersList;
+            return productList;
         }
     }
+
 }

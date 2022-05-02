@@ -1,12 +1,13 @@
 package ru.spring.store.Model;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
-@Table (name = "product")
-public class Product {
+@Table (name = "users")
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,36 +17,23 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "price")
-    private int price;
-
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(
             name = "purchases",
-            joinColumns = @JoinColumn(name = "productId"),
-            inverseJoinColumns = @JoinColumn(name = "userId")
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "productId")
     )
-    private List<Users> usersList;
+    private List<Product> productList;
 
-    public List<Users> getUsersList() {
-        return usersList;
-    }
+    public Users (){}
 
-    public void setUsersList(List<Users> usersList) {
-        this.usersList = usersList;
-    }
-
-    public Product(){}
-
-    public Product(String name, int price) {
+    public Users(String name) {
         this.name = name;
-        this.price = price;
     }
 
-    public Product(Long id, String name, int price) {
+    public Users(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.price = price;
     }
 
     public Long getId() {
@@ -64,21 +52,23 @@ public class Product {
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
+
+
+
+
+    public List<Product> getProductList() {
+        return productList;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
-
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "Users{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", price=" + price +
                 '}';
     }
 }
