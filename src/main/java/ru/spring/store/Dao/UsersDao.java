@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.spring.store.Model.Product;
 import ru.spring.store.Model.Users;
-import ru.spring.store.SessionFactoryUtils;
 
 import java.util.List;
 

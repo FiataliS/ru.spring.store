@@ -1,12 +1,10 @@
 package ru.spring.store.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.spring.store.Dao.ProductDao;
 import ru.spring.store.Model.Product;
 import ru.spring.store.Model.Users;
-import ru.spring.store.SessionFactoryUtils;
 
 import java.util.List;
 
@@ -16,10 +14,6 @@ public class ProductService {
     @Autowired
     ProductDao productDao;
 
-    @Autowired
-    public ProductService(SessionFactoryUtils sessionFactoryUtils) {
-        productDao = new ProductDao(sessionFactoryUtils);
-    }
 
 
     public Product getProduct(Long id) {
