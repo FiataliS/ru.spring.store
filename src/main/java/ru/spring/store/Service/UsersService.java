@@ -1,37 +1,32 @@
 package ru.spring.store.Service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.spring.store.Dao.UsersDao;
-import ru.spring.store.Model.Product;
 import ru.spring.store.Model.Users;
+import ru.spring.store.repositories.UsersRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsersService {
 
-    @Autowired
-    UsersDao usersDao;
+    private UsersRepository usersRepository;
 
-    @Autowired
-    public UsersService(SessionFactoryUtils sessionFactoryUtils) {
-        usersDao = new UsersDao(sessionFactoryUtils);
-    }
-
-    public Users getUsers(Long id) {
-        return usersDao.findById(id);
+    public Optional<Users> getUsers(Long id) {
+        return usersRepository.findById(id);
     }
 
     public List<Users> getAllUsers() {
-        return usersDao.findAll();
+        return usersRepository.findAll();
     }
 
     public void addUsers(String name) {
-        usersDao.saveOrUpdate(new Users(name));
+        usersRepository.save(new Users(name));
     }
 
-    public List<Product> getAllProductToUsers(Long usersId) {
-        return usersDao.getAllProductToUsers(usersId);
-    }
+//    public List<Product> getAllProductToUsers(Long usersId) {
+//        return usersRepository.getAllProductToUsers(usersId);
+//    }
 }

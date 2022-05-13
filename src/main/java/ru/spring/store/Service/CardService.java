@@ -15,7 +15,6 @@ public class CardService {
 
     private List<Product> cardList = new ArrayList<>();
 
-    @Autowired
     private ProductService productService;
 
 
@@ -24,7 +23,7 @@ public class CardService {
     }
 
     public void addProductCard(Long id) {
-        this.cardList.add(productService.getProduct(id));
+        this.cardList.add(productService.getProduct(id).orElseThrow());
     }
 
     public void delProductCard(Long id) {

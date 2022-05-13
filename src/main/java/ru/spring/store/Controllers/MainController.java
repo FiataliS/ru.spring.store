@@ -2,9 +2,7 @@ package ru.spring.store.Controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.spring.store.Dao.ProductDao;
 import ru.spring.store.Model.Product;
 import ru.spring.store.Service.CardService;
 import ru.spring.store.Service.ProductService;
@@ -14,10 +12,8 @@ import java.util.List;
 @RestController
 public class MainController {
 
-    @Autowired
     ProductService productService;
-
-    @Autowired
+    
     CardService card;
 
     @GetMapping("/product/all")
