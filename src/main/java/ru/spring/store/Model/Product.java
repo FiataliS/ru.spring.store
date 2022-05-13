@@ -19,21 +19,21 @@ public class Product {
     @Column(name = "price")
     private int price;
 
-    @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "purchases",
-            joinColumns = @JoinColumn(name = "productId"),
-            inverseJoinColumns = @JoinColumn(name = "userId")
-    )
-    private List<Users> usersList;
+//    @ManyToMany (fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "purchases",
+//            joinColumns = @JoinColumn(name = "productId"),
+//            inverseJoinColumns = @JoinColumn(name = "userId")
+//    )
+//    private List<Users> usersList;
 
-    public List<Users> getUsersList() {
-        return usersList;
-    }
-
-    public void setUsersList(List<Users> usersList) {
-        this.usersList = usersList;
-    }
+//    public List<Users> getUsersList() {
+//        return usersList;
+//    }
+//
+//    public void setUsersList(List<Users> usersList) {
+//        this.usersList = usersList;
+//    }
 
     public Product(){}
 

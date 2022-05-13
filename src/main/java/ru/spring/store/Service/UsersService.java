@@ -1,7 +1,6 @@
 package ru.spring.store.Service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.spring.store.Model.Users;
 import ru.spring.store.repositories.UsersRepository;

@@ -1,7 +1,5 @@
 package ru.spring.store.Model;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,13 +15,13 @@ public class Users {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "purchases",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "productId")
-    )
-    private List<Product> productList;
+//    @ManyToMany (fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "purchases",
+//            joinColumns = @JoinColumn(name = "userId"),
+//            inverseJoinColumns = @JoinColumn(name = "productId")
+//    )
+//    private List<Product> productList;
 
     public Users (){}
 
@@ -52,17 +50,13 @@ public class Users {
         this.name = name;
     }
 
-
-
-
-
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
-    }
+//    public List<Product> getProductList() {
+//        return productList;
+//    }
+//
+//    public void setProductList(List<Product> productList) {
+//        this.productList = productList;
+//    }
 
     @Override
     public String toString() {

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import ru.spring.store.Model.Product;
 
+import javax.persistence.Access;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class CardService {
 
     private List<Product> cardList = new ArrayList<>();
 
+    @Autowired
     private ProductService productService;
 
 
@@ -23,11 +25,11 @@ public class CardService {
     }
 
     public void addProductCard(Long id) {
-        this.cardList.add(productService.getProduct(id).orElseThrow());
+        this.cardList.add(productService.findById(id).orElseThrow());
     }
 
     public void delProductCard(Long id) {
-            this.cardList.remove(productService.getProduct(id));
+            this.cardList.remove(productService.findById(id));
     }
 
     public int sumCardList() {
