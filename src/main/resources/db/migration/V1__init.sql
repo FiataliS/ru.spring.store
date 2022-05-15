@@ -4,5 +4,5 @@ INSERT INTO product (name, price) VALUES ('Гала', 10), ('Черный при
 CREATE TABLE IF NOT EXISTS users (id bigserial, name VARCHAR(255), PRIMARY KEY (id));
 INSERT INTO users (name) VALUES ('Пользователь_1'), ('Пользователь_2');
 
-CREATE TABLE IF NOT EXISTS purchases (userId int REFERENCES users (id), productId int REFERENCES product (id));
-INSERT INTO purchases (userId, productId) VALUES (1,2),(1,1),(1,3),(1,4),(2,3),(2,4),(2,1);
+CREATE TABLE IF NOT EXISTS purchases (user_id int REFERENCES users (id), product_id int REFERENCES product (id));
+INSERT INTO purchases (user_id, product_id) VALUES (1,2),(1,1),(1,3),(1,4),(2,3),(2,4),(2,1);

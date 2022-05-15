@@ -1,11 +1,13 @@
 package ru.spring.store.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 
 @Entity
-@Table (name = "product")
+@Table(name = "product")
 public class Product {
 
     @Id
@@ -19,23 +21,25 @@ public class Product {
     @Column(name = "price")
     private int price;
 
-//    @ManyToMany (fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "purchases",
-//            joinColumns = @JoinColumn(name = "productId"),
-//            inverseJoinColumns = @JoinColumn(name = "userId")
-//    )
-//    private List<Users> usersList;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "purchases",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @JsonIgnore
+    private List<Users> usersList;
 
-//    public List<Users> getUsersList() {
-//        return usersList;
-//    }
-//
-//    public void setUsersList(List<Users> usersList) {
-//        this.usersList = usersList;
-//    }
+    public List<Users> getUsersList() {
+        return usersList;
+    }
 
-    public Product(){}
+    public void setUsersList(List<Users> usersList) {
+        this.usersList = usersList;
+    }
+
+    public Product() {
+    }
 
     public Product(String name, int price) {
         this.name = name;
