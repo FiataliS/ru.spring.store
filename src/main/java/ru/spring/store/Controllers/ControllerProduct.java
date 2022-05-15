@@ -39,18 +39,8 @@ public class ControllerProduct {
 
 
     @PostMapping("/products/range")
-    public List<Product> minMaxProduct(@RequestParam int min, @RequestParam int max) {
+    public List<Product> minMaxProduct(@RequestParam(defaultValue = "0") int min, @RequestParam(defaultValue = "999999999") int max) {
         return productService.minMaxProduct(min, max);
-    }
-
-    @PostMapping("/products/min")
-    public List<Product> minProduct(@RequestParam int min) {
-        return productService.minMaxProduct(min, 999999999);
-    }
-
-    @PostMapping("/products/max")
-    public List<Product> maxProduct(@RequestParam int max) {
-        return productService.minMaxProduct(0, max);
     }
 
 
