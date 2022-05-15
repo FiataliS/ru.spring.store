@@ -35,4 +35,10 @@ public class ControllerUsers {
         usersService.delUsers(id);
     }
 
+
+    @PostMapping("/users/products")
+    public List<Users> getAllUsersToProduct (@RequestParam Long id) {
+        return usersService.getAllUsersToProduct(id);
+    }
+
 }

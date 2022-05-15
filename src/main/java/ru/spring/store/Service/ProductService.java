@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.spring.store.Model.Product;
 import ru.spring.store.Model.Users;
 import ru.spring.store.Repositories.ProductRepository;
+import ru.spring.store.Repositories.UsersRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
 
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
@@ -37,8 +39,13 @@ public class ProductService {
         return productRepository.findAllByPriceBetween(min,max);
     }
 
-//    public List<Users> getAllUsersToProduct(Long productId) {
-//        return productRepository.getAllUsersToProduct(productId);
+
+//    public int minPrice(){
+//        return findAll().stream().min(Math::min).get();
 //    }
+
+    public List<Product> getAllProductToUsers(Long Id) {
+        return productRepository.getAllProductToUsers(Id);
+    }
 
 }

@@ -43,9 +43,8 @@ public class ControllerProduct {
         return productService.minMaxProduct(min, max);
     }
 
-
-//    @GetMapping("/products/users/{id}")
-//    public List<Users> getAllByUsersList (@PathVariable Long id) {
-//       return productService.getAllUsersToProduct(id);
-//    }
+    @PostMapping("/products/users")
+    public List<Product> getAllProductToUsers (@RequestParam Long id) {
+       return productService.getAllProductToUsers(id);
+    }
 }

@@ -3,6 +3,7 @@ package ru.spring.store.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.spring.store.Model.Product;
 import ru.spring.store.Model.Users;
 import ru.spring.store.Repositories.UsersRepository;
 
@@ -33,7 +34,8 @@ public class UsersService {
         usersRepository.deleteById(id);
     }
 
-//    public List<Product> getAllProductToUsers(Long usersId) {
-//        return usersRepository.getAllProductToUsers(usersId);
-//    }
+    public List<Users> getAllUsersToProduct(Long Id) {
+        System.out.printf(usersRepository.getAllUsersToProduct(Id).toString());
+        return usersRepository.getAllUsersToProduct(Id);
+    }
 }
