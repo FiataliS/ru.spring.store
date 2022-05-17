@@ -1,55 +1,26 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
     const contextPath = 'http://localhost:8189/app';
 
-    $scope.loadProduct = function () {
-        $http.get(contextPath + '/product/all')
+    $scope.loadProducts = function () {
+        $http.get(contextPath + '/products')
             .then(function (response) {
-                $scope.productList = response.data;
+                $scope.productsList = response.data;
             });
     };
 
-    $scope.cardAdd = function (productId){
-        $http({
-            url: contextPath + '/card/add',
-            method: 'GET',
-            params: {
-                productId: productId,
-            }
-        }).then(function (response){
-            $scope.loadProduct();
-        });
-    };
-    $scope.loadProduct();
+    $scope.deleteProduct = function (Id) {
+        $http.get(contextPath + '/products/delete/' + Id)
+            .then(function (response) {
+                $scope.loadProducts();
+            });
+    }
 
-    $scope.loadCard = function () {
-            $http.get(contextPath + '/card/all')
-                .then(function (response) {
-                    $scope.cardList = response.data;
-                    $scope.countCost();
-                });
-        };
+    $scope.createProduct = function (){
+        $http.post(contextPath + '/products', $scope.newProduct)
+            .then(function (response) {
+                $scope.loadProducts()
+            });
+    }
 
-
-    $scope.clearId = function (productId){
-                $http({
-                    url: contextPath + '/card/del',
-                    method: 'GET',
-                    params: {
-                        productId: productId,
-                    }
-                }).then(function (response){
-                    $scope.loadCard();
-                });
-            };
-
-    $scope.countCost = function () {
-                $http.get(contextPath + '/card/countCost')
-                    .then(function (response) {
-                        $scope.countCost = response.data;
-               });
-    };
-
-    $scope.countCost();
-    $scope.loadCard();
-
+    $scope.loadProducts();
 });

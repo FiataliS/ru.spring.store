@@ -28,8 +28,8 @@ public class ControllerProduct {
     }
 
     @PostMapping("/products")
-    public void addProduct(@RequestParam String name, @RequestParam int price) {
-        productService.addProduct(name, price);
+    public void addProduct(@RequestBody Product product) {
+        productService.addProduct(product);
     }
 
     @GetMapping("products/delete/{id}")

@@ -27,8 +27,8 @@ public class ProductService {
         return productRepository.findAll().stream().map(p -> new Product(p.getId(), p.getName(), p.getPrice())).collect(Collectors.toList());
     }
 
-    public void addProduct(String name, int price) {
-        productRepository.save(new Product(name, price));
+    public void addProduct(Product product) {
+        productRepository.save(new Product(product.getName(), product.getPrice()));
     }
 
     public void delProduct(Long id) {
