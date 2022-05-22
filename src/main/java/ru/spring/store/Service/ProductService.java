@@ -2,15 +2,17 @@ package ru.spring.store.Service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import ru.spring.store.Dto.ProductDto;
 import ru.spring.store.Model.Product;
-import ru.spring.store.Model.Users;
 import ru.spring.store.Repositories.ProductRepository;
-import ru.spring.store.Repositories.UsersRepository;
+import ru.spring.store.Repositories.specification.ProductSpecification;
+import ru.spring.store.exceptions.ResourceNotFoundExeption;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -19,13 +21,27 @@ public class ProductService {
     private ProductRepository productRepository;
 
 
-    public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
+    public Page<ProductDto> find(Integer p, Integer minPrice, Integer maxPrice, String name) {
+        Specification<Product> spec = Specification.where(null);
+
+        if (minPrice != null) {
+            spec = spec.and(ProductSpecification.greaterThanOrEqualTo(minPrice));
+        }
+
+        if (maxPrice != null) {
+            spec = spec.and(ProductSpecification.lessThanOrEqualTo(maxPrice));
+        }
+        if (name != null) {
+            spec = spec.and(ProductSpecification.nameLike(name));
+        }
+
+        return productRepository.findAll(spec, PageRequest.of(p - 1, 5)).map(ProductDto::new);
     }
 
-    public List<Product> findAll() {
-        return productRepository.findAll().stream().map(p -> new Product(p.getId(), p.getName(), p.getPrice())).collect(Collectors.toList());
+    public ProductDto findById(Long id) {
+        return productRepository.findById(id).map(ProductDto::new).orElseThrow(()-> new ResourceNotFoundExeption("Product " + id + " не наеден"));
     }
+
 
     public void addProduct(Product product) {
         productRepository.save(new Product(product.getName(), product.getPrice()));
@@ -35,17 +51,9 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public List<Product> minMaxProduct(Integer min, Integer max) {
-        return productRepository.findAllByPriceBetween(min,max);
-    }
 
-
-//    public int minPrice(){
-//        return findAll().stream().min(Math::min).get();
-//    }
-
-    public List<Product> getAllProductToUsers(Long Id) {
-        return productRepository.getAllProductToUsers(Id);
+    public List<ProductDto> getAllProductToUsers(Long Id) {
+        return productRepository.getAllProductToUsers(Id).stream().map(ProductDto::new).toList();
     }
 
 }

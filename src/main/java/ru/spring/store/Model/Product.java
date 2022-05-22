@@ -21,6 +21,17 @@ public class Product {
     @Column(name = "price")
     private int price;
 
+    @Column(name = "country")
+    private String country;
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "purchases",

@@ -1,50 +1,53 @@
 package ru.spring.store.Controllers;
 
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import ru.spring.store.Dto.ProductDto;
 import ru.spring.store.Model.Product;
-import ru.spring.store.Model.Users;
 import ru.spring.store.Service.ProductService;
+
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/products")
 public class ControllerProduct {
 
     @Autowired
     ProductService productService;
 
-
-    @GetMapping("/products")
-    public List<Product> allProduct() {
-        return productService.findAll();
+    @GetMapping()
+    public Page<ProductDto> find(@RequestParam(name = "p", defaultValue = "1") Integer page,
+                                 @RequestParam(name = "min_price", required = false) Integer minPrice,
+                                 @RequestParam(name = "max_price", required = false) Integer maxPrice,
+                                 @RequestParam(name = "name", required = false) String name
+    ) {
+        if (page < 1) {
+            page = 1;
+        }
+        return productService.find(page, minPrice, maxPrice, name);
     }
 
-    @GetMapping("/products/{id}")
-    public Product getProduct(@PathVariable Long id) {
-        return productService.findById(id).orElseThrow();
+
+    @GetMapping("/{id}")
+    public ProductDto getProduct(@PathVariable Long id) {
+        return productService.findById(id);
     }
 
-    @PostMapping("/products")
-    public void addProduct(@RequestBody Product product) {
-        productService.addProduct(product);
-    }
-
-    @GetMapping("products/delete/{id}")
+    @DeleteMapping("/{id}")
     public void delProduct(@PathVariable Long id) {
         productService.delProduct(id);
     }
 
-
-    @PostMapping("/products/range")
-    public List<Product> minMaxProduct(@RequestParam(defaultValue = "0") int min, @RequestParam(defaultValue = "999999999") int max) {
-        return productService.minMaxProduct(min, max);
+    @PostMapping("")
+    public void addProduct(@RequestBody Product product) {
+        productService.addProduct(product);
     }
 
-    @PostMapping("/products/users")
-    public List<Product> getAllProductToUsers (@RequestParam Long id) {
-       return productService.getAllProductToUsers(id);
+    @GetMapping("/users/{id}")
+    public List<ProductDto> getAllProductToUsers(@PathVariable Long id) {
+        return productService.getAllProductToUsers(id);
     }
 }

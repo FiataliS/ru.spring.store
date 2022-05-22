@@ -1,5 +1,5 @@
-CREATE TABLE IF NOT EXISTS product (id bigserial, name VARCHAR(255), price int, PRIMARY KEY (id));
-INSERT INTO product (name, price) VALUES ('Гала', 10), ('Черный принц', 13), ('Карамелька', 23), ('Спартан', 50), ('Фуджи', 47), ('Ренет Симиренко', 5), ('Хоней Крисп', 73);
+CREATE TABLE IF NOT EXISTS product (id bigserial, name VARCHAR(255),  price int, country VARCHAR (255), PRIMARY KEY (id));
+INSERT INTO product (name, price, country) VALUES ('Гала', 10, 'Китай'), ('Черный принц', 13, 'Китай'), ('Карамелька', 23, 'Китай'), ('Спартан', 50, 'Россия'), ('Фуджи', 47, 'Китай'), ('Ренет Симиренко', 5, 'Россия'), ('Хоней Крисп', 73, 'Китай'), ('Спартан', 500, 'Россия'), ('Фуджи', 35, 'Китай'), ('Ренет Симиренко', 80, 'Россия'), ('Хоней Крисп', 49, 'Китай');
 
 CREATE TABLE IF NOT EXISTS users (id bigserial, name VARCHAR(255), PRIMARY KEY (id));
 INSERT INTO users (name) VALUES ('Пользователь_1'), ('Пользователь_2');

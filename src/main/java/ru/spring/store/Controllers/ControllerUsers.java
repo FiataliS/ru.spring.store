@@ -10,34 +10,34 @@ import ru.spring.store.Service.UsersService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/users")
 public class ControllerUsers {
 
     @Autowired
     UsersService usersService;
 
-    @GetMapping("/users")
+    @GetMapping()
     public List<Users> allUsers() {
-       return usersService.findAll();
+        return usersService.findAll();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public Users getProduct(@PathVariable Long id) {
         return usersService.findById(id).orElseThrow();
     }
 
-    @PostMapping("/users")
+    @PostMapping()
     public void addProduct(@RequestParam String name) {
         usersService.addUsers(name);
     }
 
-    @GetMapping("users/delete/{id}")
+    @DeleteMapping("/{id}")
     public void delProduct(@PathVariable Long id) {
         usersService.delUsers(id);
     }
 
-
-    @PostMapping("/users/products")
-    public List<Users> getAllUsersToProduct (@RequestParam Long id) {
+    @GetMapping("/products/")
+    public List<Users> getAllUsersToProduct(@RequestParam(name = "id") Long id) {
         return usersService.getAllUsersToProduct(id);
     }
 

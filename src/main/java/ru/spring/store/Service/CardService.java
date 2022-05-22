@@ -3,6 +3,7 @@ package ru.spring.store.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import ru.spring.store.Dto.ProductDto;
 import ru.spring.store.Model.Product;
 
 import javax.persistence.Access;
@@ -14,18 +15,18 @@ import java.util.List;
 @Scope("prototype")
 public class CardService {
 
-    private List<Product> cardList = new ArrayList<>();
+    private List<ProductDto> cardList = new ArrayList<>();
 
     @Autowired
     private ProductService productService;
 
 
-    public List<Product> getCardList() {
+    public List<ProductDto> getCardList() {
         return cardList;
     }
 
     public void addProductCard(Long id) {
-        this.cardList.add(productService.findById(id).orElseThrow());
+        this.cardList.add(productService.findById(id));
     }
 
     public void delProductCard(Long id) {
@@ -34,7 +35,7 @@ public class CardService {
 
     public int sumCardList() {
         int i = 0;
-        for (Product c : cardList) {
+        for (ProductDto c : cardList) {
             i += c.getPrice();
         }
         return i;
