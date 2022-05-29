@@ -1,8 +1,12 @@
 package ru.spring.store.Controllers;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import ru.spring.store.Dto.ProductDto;
+import ru.spring.store.Dto.UserDto;
 import ru.spring.store.Model.Product;
 import ru.spring.store.Model.Users;
 import ru.spring.store.Service.UsersService;
@@ -11,28 +15,32 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
 public class ControllerUsers {
 
-    @Autowired
-    UsersService usersService;
+    private final UsersService usersService;
 
     @GetMapping()
-    public List<Users> allUsers() {
-        return usersService.findAll();
+    public Page<UserDto> find(@RequestParam(name = "p", defaultValue = "1") Integer page
+    ) {
+        if (page < 1) {
+            page = 1;
+        }
+        return usersService.findAll(page);
     }
 
     @GetMapping("/{id}")
-    public Users getProduct(@PathVariable Long id) {
+    public Users getUsers(@PathVariable Long id) {
         return usersService.findById(id).orElseThrow();
     }
 
     @PostMapping()
-    public void addProduct(@RequestParam String name) {
-        usersService.addUsers(name);
+    public void addUsers(@RequestParam Users user) {
+        usersService.addUsers(user);
     }
 
     @DeleteMapping("/{id}")
-    public void delProduct(@PathVariable Long id) {
+    public void delUsers(@PathVariable Long id) {
         usersService.delUsers(id);
     }
 

@@ -2,6 +2,7 @@ package ru.spring.store.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Users {
 
     @Id
@@ -31,6 +33,12 @@ public class Users {
     )
     @JsonIgnore
     private List<Product> productList;
+
+
+    public Users(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Override
     public String toString() {
