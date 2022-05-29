@@ -1,5 +1,9 @@
 package ru.spring.store.Service;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -9,10 +13,16 @@ import ru.spring.store.Model.Product;
 import javax.persistence.Access;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 @Service
 @Scope("prototype")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CardService {
 
     private List<ProductDto> cardList = new ArrayList<>();
@@ -21,9 +31,10 @@ public class CardService {
     private ProductService productService;
 
 
-    public List<ProductDto> getCardList() {
-        return cardList;
+    public Map<ProductDto, Long> getCardList() {
+        return cardListCount();
     }
+
 
     public void addProductCard(Long id) {
         this.cardList.add(productService.findById(id));
@@ -39,6 +50,13 @@ public class CardService {
             i += c.getPrice();
         }
         return i;
+    }
+
+    private Map<ProductDto, Long> cardListCount (){
+        Map<ProductDto,Long> countFrequency = cardList.stream().collect(Collectors.groupingBy(
+                Function.identity(), Collectors.counting()
+        ));
+        return countFrequency;
     }
 
     public void clearCard() {

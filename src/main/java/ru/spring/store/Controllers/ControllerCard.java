@@ -8,6 +8,7 @@ import ru.spring.store.Model.Product;
 import ru.spring.store.Service.CardService;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -15,8 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ControllerCard {
 
-    @Autowired
-    CardService card;
+    private final CardService card;
 
     @PostMapping()
     public void addProductCard(@RequestParam Long id) {
@@ -29,7 +29,7 @@ public class ControllerCard {
     }
 
     @GetMapping()
-    public List<ProductDto> allCard() {
+    public Map<ProductDto, Long> allCard() {
         return card.getCardList();
     }
 
