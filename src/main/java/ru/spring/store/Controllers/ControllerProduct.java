@@ -1,22 +1,27 @@
 package ru.spring.store.Controllers;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import ru.spring.store.Dto.ProductDto;
 import ru.spring.store.Model.Product;
 import ru.spring.store.Service.ProductService;
+import ru.spring.store.converters.ProductConverter;
+import ru.spring.store.validators.ProductValidator;
 
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
+@RequiredArgsConstructor
 public class ControllerProduct {
 
-    @Autowired
-    ProductService productService;
+    private final ProductService productService;
+    private final ProductValidator productValidator;
+    private final ProductConverter productConverter;
 
     @GetMapping()
     public Page<ProductDto> find(@RequestParam(name = "p", defaultValue = "1") Integer page,
@@ -41,10 +46,21 @@ public class ControllerProduct {
         productService.delProduct(id);
     }
 
-    @PostMapping("")
-    public void addProduct(@RequestBody Product product) {
-        productService.addProduct(product);
+    @PostMapping
+    public ProductDto addProduct(@RequestBody ProductDto productDto) {
+        productValidator.validate(productDto);
+        Product product = productConverter.dtoToEntity(productDto);
+        product = productService.addProduct(product);
+        return productConverter.entityToDto(product);
     }
+
+    @PutMapping
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        productValidator.validate(productDto);
+        Product product = productService.update(productDto);
+        return productConverter.entityToDto(product);
+    }
+
 
     @GetMapping("/users/{id}")
     public List<ProductDto> getAllProductToUsers(@PathVariable Long id) {

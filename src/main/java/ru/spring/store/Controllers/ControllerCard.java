@@ -1,5 +1,6 @@
 package ru.spring.store.Controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.spring.store.Dto.ProductDto;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/card")
+@RequiredArgsConstructor
 public class ControllerCard {
 
     @Autowired
