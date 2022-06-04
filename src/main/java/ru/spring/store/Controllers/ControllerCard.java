@@ -1,13 +1,10 @@
 package ru.spring.store.Controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.spring.store.Dto.ProductDto;
-import ru.spring.store.Model.Product;
 import ru.spring.store.Service.CardService;
 
-import java.util.List;
 import java.util.Map;
 
 

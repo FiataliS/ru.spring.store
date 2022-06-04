@@ -2,7 +2,7 @@ package ru.spring.store.converters;
 
 import org.springframework.stereotype.Component;
 import ru.spring.store.Dto.ProductDto;
-import ru.spring.store.Model.Product;
+import ru.spring.store.Entities.Product;
 
 @Component
 public class ProductConverter {

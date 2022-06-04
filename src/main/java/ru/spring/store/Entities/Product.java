@@ -1,21 +1,19 @@
-package ru.spring.store.Model;
+package ru.spring.store.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
+
 @Entity
-@Table(name = "users")
+@Table(name = "product")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Users {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,26 +23,39 @@ public class Users {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "price")
+    private int price;
+
+    @Column(name = "country")
+    private String country;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "purchases",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     @JsonIgnore
-    private List<Product> productList;
+    private List<User> usersList;
 
 
-    public Users(Long id, String name) {
+    public Product(Long id, String name, int price) {
         this.id = id;
         this.name = name;
+        this.price = price;
     }
 
     @Override
     public String toString() {
-        return "Users{" +
+        return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", price=" + price +
                 '}';
+
+
     }
+
+
+
 }

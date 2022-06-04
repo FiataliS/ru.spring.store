@@ -1,7 +1,7 @@
 package ru.spring.store.Repositories.specification;
 
 import org.springframework.data.jpa.domain.Specification;
-import ru.spring.store.Model.Product;
+import ru.spring.store.Entities.Product;
 
 public class ProductSpecification {
 

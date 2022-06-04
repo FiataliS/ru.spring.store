@@ -3,14 +3,11 @@ package ru.spring.store.Service;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import ru.spring.store.Dto.ProductDto;
-import ru.spring.store.Model.Product;
 
-import javax.persistence.Access;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.spring.store.Dto.ProductDto;
-import ru.spring.store.Model.Product;
+import ru.spring.store.Entities.Product;
 import ru.spring.store.Repositories.ProductRepository;
 import ru.spring.store.Repositories.specification.ProductSpecification;
 import ru.spring.store.converters.ProductConverter;
